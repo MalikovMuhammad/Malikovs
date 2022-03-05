@@ -1,0 +1,240 @@
+<html>
+<head>
+    <style>
+        body {
+            margin:0;
+        }
+        .sticky {
+            position: fixed;
+            width: 100%;
+            margin: 0;
+            background-color: white;
+            z-index: 999999;
+            border-bottom: 1px solid black;
+        }
+    </style>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript" src="charts_functions.js"></script>
+	<script type="text/javascript">    
+           var timeframe = '60';
+           function setTimefrime(newtimeframe){ 
+                timeframe = newtimeframe;
+                document.getElementById('CurrentTF').innerHTML = "Таймфрейм - "+timeframe+":";
+           }
+           
+           function hide() {            
+                if (document.getElementById('pairs_col1').style.display == "none") {
+                    document.getElementById('pairs_col1').style.display = "";
+                    document.getElementById('pairs_col2').style.display = "";
+                    document.getElementById('btn_hide_pairs').value = 'Скрить все инструменты';
+                    document.getElementById('HideBtnCol').colspan = 2;                                         
+                }           
+                else {
+                    document.getElementById('pairs_col1').style.display = "none";
+                    document.getElementById('pairs_col2').style.display = "none";
+                    document.getElementById('btn_hide_pairs').value = 'Показать все инструменты';
+                    document.getElementById('HideBtnCol').colspan = 1;
+                }     
+	       }
+           
+           window.onscroll = function() {
+                if (window.pageYOffset > 60) {
+                    document.getElementById("myHeader").classList.add("sticky");
+                } else {
+                    document.getElementById("myHeader").classList.remove("sticky");
+                }  
+                
+           };
+    </script>
+    	
+</head>
+
+<body>
+    <div id="myHeader">    
+    <table>
+        <tr>
+            <td id="HideBtnCol" colspan="2" style="width:40px; vertical-align: Center; text-align: left; padding: 5 15 10;">
+                <input style="padding: 10 5; " id="btn_hide_pairs" type="button" value="Скрить все инструменты" onclick="hide()"/>
+            </td>
+            <td style="vertical-align: top; text-align: left; padding: 10 15 10;">
+                <span id="CurrentTF">Таймфрейм - H1:</span> 
+                <input style="padding: 5; " id="" type="button" value="M" onclick="setTimefrime('M')"/>
+                <input style="padding: 5; " id="" type="button" value="W" onclick="setTimefrime('W')"/>
+                <input style="padding: 5; " id="" type="button" value="D" onclick="setTimefrime('D')"/>
+                <input style="padding: 5; " id="" type="button" value="H4" onclick="setTimefrime('240')"/>
+                <input style="padding: 5; " id="" type="button" value="H1" onclick="setTimefrime('H1')"/>
+                <input style="padding: 5; " id="" type="button" value="M30" onclick="setTimefrime('30')"/>
+                <input style="padding: 5; " id="" type="button" value="M15" onclick="setTimefrime('15')"/>
+                <input style="padding: 5; " id="" type="button" value="M5" onclick="setTimefrime('5')"/>
+                <input style="padding: 5; " id="" type="button" value="M1" onclick="setTimefrime('1')"/> 
+                <em>&nbsp;&nbsp;После изменния TF, надо отключить и включить график для обновления TF</em>
+                <br />
+				Графики: &nbsp;
+                <input type="range" id="chartWidth" min="450" max="1000" value="450" step="30" style="margin: 10 0 0;"  oninput="setChartWidth()" style="width: 40px;"/>
+                <em style="">&nbsp;&nbsp;Ширина <span id="ChartWidthInfo"></span></em>
+                &nbsp;&nbsp;
+                <input type="range" id="chartHeight" min="250" max="600" value="250" step="30" style="margin: 10 0 0;" oninput="setChartHeight()" style="width: 40px;"/>
+                <em style="">&nbsp;&nbsp;Выоста <span id="ChartHeightInfo"></span></em>
+            </td>
+        </tr>
+    </table>
+    </div>
+    
+    <table>		
+        <tr>
+            <!-- Криптовалютные Кнопки -->
+		<td id="pairs_col1" style="display:; width: 20px; border-left: 1px dotted black; border-right: 1px dotted black; border-top: 1px dotted black; vertical-align: top; padding: 10 5 5;">			
+			<p align="center">Крипты:</p>
+					<p><input type="button" value="Все сразу" onclick="kriptoAll()"/></p>
+					<p><input type="button" value="BTCUSDT" onclick="kripto('BTCUSDT')"/></p>                	
+					<p><input type="button" value="BCHUSDT" onclick="kripto('BCHUSDT')"/></p>
+                	<p><input type="button" value="ETHUSDT" onclick="kripto('ETHUSDT')"/></p>
+                	<p><input type="button" value="ETCUSDT" onclick="kripto('ETCUSDT')"/></p>
+                	<p><input type="button" value="LTCUSDT" onclick="kripto('LTCUSDT')"/></p>
+                	<p><input type="button" value="XRPUSDT" onclick="kripto('XRPUSDT')"/></p>
+                	<p><input type="button" value="EOSUSDT" onclick="kripto('EOSUSDT')"/></p>
+                	<p><input type="button" value="BNBUSDT" onclick="kripto('BNBUSDT')"/></p>
+                	<p><input type="button" value="SOLUSDT" onclick="kripto('SOLUSDT')"/></p>
+                	<p><input type="button" value="ADAUSDT" onclick="kripto('ADAUSDT')"/></p>
+	                
+	                <p><input type="button" value="LUNAUSDT" onclick="kripto('LUNAUSDT')"/></p>
+	                <p><input type="button" value="GALAUSDT" onclick="kripto('GALAUSDT')"/></p>
+	                <p><input type="button" value="TRXUSDT" onclick="kripto('TRXUSDT')"/></p>
+	                <p><input type="button" value="DOTUSDT" onclick="kripto('DOTUSDT')"/></p>
+	                <p><input type="button" value="MATICUSDT" onclick="kripto('MATICUSDT')"/></p>
+	                <p><input type="button" value="SANDUSDT" onclick="kripto('SANDUSDT')"/></p>
+	                <p><input type="button" value="MANAUSDT" onclick="kripto('MANAUSDT')"/></p>
+	                <p><input type="button" value="FTMUSDT" onclick="kripto('FTMUSDT')"/></p>
+	                <p><input type="button" value="LINKUSDT" onclick="kripto('LINKUSDT')"/></p>
+	                <p><input type="button" value="DOGEUSDT" onclick="kripto('DOGEUSDT')"/></p>
+	                
+	                <p><input type="button" value="ATOMUSDT" onclick="kripto('ATOMUSDT')"/></p>
+	                <p><input type="button" value="XLMUSDT" onclick="kripto('XLMUSDT')"/></p>
+	                <p><input type="button" value="NEOUSDT" onclick="kripto('NEOUSDT')"/></p>
+	                <p><input type="button" value="FILUSDT" onclick="kripto('FILUSDT')"/></p>
+	                <p><input type="button" value="UNIUSDT" onclick="kripto('UNIUSDT')"/></p>
+	                <p><input type="button" value="AXSUSDT" onclick="kripto('AXSUSDT')"/></p>
+	                <p><input type="button" value="ZECUSDT" onclick="kripto('ZECUSDT')"/></p>
+	                <p><input type="button" value="XMRUSDT" onclick="kripto('XMRUSDT')"/></p>
+	                <p><input type="button" value="DASHUSDT" onclick="kripto('DASHUSDT')"/></p>
+	                <p><input type="button" value="EGLDUSDT" onclick="kripto('EGLDUSDT')"/></p>
+	                
+	                <p><input type="button" value="WAVESUSDT" onclick="kripto('WAVESUSDT')"/></p>
+	                <p><input type="button" value="AAVEUSDT" onclick="kripto('AAVEUSDT')"/></p>
+	                <p><input type="button" value="XTZUSDT" onclick="kripto('XTZUSDT')"/></p>
+	                <p><input type="button" value="FLOWUSDT" onclick="kripto('FLOWUSDT')"/></p>       
+		</td>
+            <!-- Валютные Кнопки -->
+            <td id="pairs_col2" style="display:; width: 20px; border-right: 1px dotted black; border-top: 1px dotted black; vertical-align: top; padding: 10 5 5;">
+                <p align="center">Валюты:</p>    
+				<p><input type="button" value="Все сразу" onclick="valyutaAll()"/></p>				
+                <p><input type="button" value="EURUSD" onclick="valyuta('EURUSD')"/></p>            
+                <p><input type="button" value="GBPUSD" onclick="valyuta('GBPUSD')"/></p>
+                <p><input type="button" value="AUDUSD" onclick="valyuta('AUDUSD')"/></p>
+                <p><input type="button" value="NZDUSD" onclick="valyuta('NZDUSD')"/></p>
+                <p><input type="button" value="USDCAD" onclick="valyuta('USDCAD')"/></p>
+                <p><input type="button" value="USDCHF" onclick="valyuta('USDCHF')"/></p>
+                <p><input type="button" value="USDJPY" onclick="valyuta('USDJPY')"/></p>
+                <p><input type="button" value="EURGBP" onclick="valyuta('EURGBP')"/></p>
+                <p><input type="button" value="EURAUD" onclick="valyuta('EURAUD')"/></p>
+                <p><input type="button" value="EURNZD" onclick="valyuta('EURNZD')"/></p>
+                
+                <p><input type="button" value="EURCAD" onclick="valyuta('EURCAD')"/></p>
+                <p><input type="button" value="EURCHF" onclick="valyuta('EURCHF')"/></p>
+                <p><input type="button" value="EURJPY" onclick="valyuta('EURJPY')"/></p>
+                <p><input type="button" value="GBPAUD" onclick="valyuta('GBPAUD')"/></p>
+                <p><input type="button" value="GBPNZD" onclick="valyuta('GBPNZD')"/></p>
+                <p><input type="button" value="GBPCAD" onclick="valyuta('GBPCAD')"/></p>
+                <p><input type="button" value="GBPCHF" onclick="valyuta('GBPCHF')"/></p>
+                <p><input type="button" value="GBPJPY" onclick="valyuta('GBPJPY')"/></p>
+                <p><input type="button" value="AUDNZD" onclick="valyuta('AUDNZD')"/></p>
+                <p><input type="button" value="AUDCAD" onclick="valyuta('AUDCAD')"/></p>
+                
+                <p><input type="button" value="AUDCHF" onclick="valyuta('AUDCHF')"/></p>
+                <p><input type="button" value="AUDJPY" onclick="valyuta('AUDJPY')"/></p>
+                <p><input type="button" value="NZDCAD" onclick="valyuta('NZDCAD')"/></p>
+                <p><input type="button" value="NZDCHF" onclick="valyuta('NZDCHF')"/></p>
+                <p><input type="button" value="NZDJPY" onclick="valyuta('NZDJPY')"/></p>
+                <p><input type="button" value="CADCHF" onclick="valyuta('CADCHF')"/></p>
+                <p><input type="button" value="CADJPY" onclick="valyuta('CADJPY')"/></p>
+                <p><input type="button" value="CHFJPY" onclick="valyuta('CHFJPY')"/></p>
+                
+            </td>
+            <!-- Валютные графики -->
+			<td style="vertical-align: top; padding: 5 10 5 0; width:;">
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="EURUSD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="GBPUSD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="AUDUSD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="NZDUSD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="USDCAD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="USDCHF"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="USDJPY"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="EURGBP"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="EURAUD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="EURNZD"></div>
+                
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="EURCAD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="EURCHF"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="EURJPY"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="GBPAUD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="GBPNZD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="GBPCAD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="GBPCHF"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="GBPJPY"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="AUDNZD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="AUDCAD"></div>
+                
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="AUDCHF"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="AUDJPY"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="NZDCAD"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="NZDCHF"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="NZDJPY"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="CADCHF"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="CADJPY"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="CHFJPY"></div>                
+            
+            <!-- Криптовалютные графики -->			
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="BTCUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="BCHUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="ETHUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="ETCUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="LTCUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="XRPUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="EOSUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="BNBUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="SOLUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="ADAUSDT"></div>
+                
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="LUNAUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="GALAUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="TRXUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="DOTUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="MATICUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="SANDUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="MANAUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="FTMUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="LINKUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="DOGEUSDT"></div>
+                
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="ATOMUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="XLMUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="NEOUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="FILUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="UNIUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="AXSUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="ZECUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="XMRUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="DASHUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="EGLDUSDT"></div>
+                
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="WAVESUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="AAVEUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="XTZUSDT"></div>
+                <div style="display: none; float: left; margin: 5 5 30 5;" id="FLOWUSDT"></div>             
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>
+
